@@ -1,6 +1,6 @@
 import { CreditCommand } from "@application/commands/CreditCommand";
-import { Observer } from "@domain/Observer";
 import { AccountRepository } from "@domain/repositories/AccountRepository";
+import { Observer } from "@infra/queues/Observer";
 
 export class CreditHandler implements Observer {
   operation = "credit";

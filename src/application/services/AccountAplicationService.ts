@@ -1,8 +1,8 @@
-import { Publisher } from "@application/Publisher";
 import { CreditCommand } from "@application/commands/CreditCommand";
 import { DebitCommand } from "@application/commands/DebitCommand";
-import { AccountBuilder } from "@domain/entities/AccountBuilder";
+import { AccountBuilder } from "@domain/builders/AccountBuilder";
 import { AccountRepository } from "@domain/repositories/AccountRepository";
+import { Publisher } from "@infra/queues/Publisher";
 
 export class AccountApplicationService {
   constructor(

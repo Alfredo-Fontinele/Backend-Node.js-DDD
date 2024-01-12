@@ -1,5 +1,5 @@
-import { Transaction } from "@domain/value-objects/Transaction";
-import { AccountBuilder } from "./AccountBuilder";
+import { Transaction } from "@domain/entities/Transaction";
+import { AccountBuilder } from "../builders/AccountBuilder";
 
 export class Account {
   private bank?: string;

@@ -1,8 +1,8 @@
-import { Publisher } from "@application/Publisher";
 import { CreditHandler } from "@application/handlers/CreditHandler";
 import { DebitHandler } from "@application/handlers/DebitHandler";
 import { AccountApplicationService } from "@application/services/AccountAplicationService";
-import { AccountRepositoryMemory } from "@domain/repositories/AccountRepositoryMemory";
+import { Publisher } from "@infra/queues/Publisher";
+import { AccountRepositoryMemory } from "@infra/repositories/AccountRepositoryMemory";
 
 let service: AccountApplicationService;
 
