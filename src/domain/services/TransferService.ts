@@ -7,7 +7,7 @@ export class TransferService {
     accountTo.credit(amount);
   }
 
-  validTransfer(accountFrom: Account, amount: number) {
+  private validTransfer(accountFrom: Account, amount: number) {
     const accountFromBalance = accountFrom.getBalance();
     if (accountFromBalance < amount) {
       throw new Error("money insuficienty to transfer");

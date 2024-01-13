@@ -1,5 +1,6 @@
 import { CreditCommand } from "@application/commands/CreditCommand";
 import { DebitCommand } from "@application/commands/DebitCommand";
+import { TransferCommand } from "@application/commands/TransferCommand";
 import { AccountBuilder } from "@domain/builders/AccountBuilder";
 import { AccountRepository } from "@domain/repositories/AccountRepository";
 import { Publisher } from "@infra/queues/Publisher";
@@ -7,7 +8,7 @@ import { Publisher } from "@infra/queues/Publisher";
 export class AccountApplicationService {
   constructor(
     private publisher: Publisher,
-    private readonly accountRepository: AccountRepository
+    private accountRepository: AccountRepository
   ) {}
 
   create(documet: string) {
@@ -23,6 +24,19 @@ export class AccountApplicationService {
   debit(accountDocument: string, amount: number) {
     const debitCommand = new DebitCommand(accountDocument, amount);
     this.publisher.publish(debitCommand);
+  }
+
+  transfer(
+    accountFromDocument: string,
+    accountToDocument: string,
+    amount: number
+  ) {
+    const transferCommand = new TransferCommand(
+      accountFromDocument,
+      accountToDocument,
+      amount
+    );
+    this.publisher.publish(transferCommand);
   }
 
   get(accountDocument: string) {

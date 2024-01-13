@@ -1,6 +1,6 @@
-import { TransferCommand } from "@application/commands/TransferCommand";
 import { CreditHandler } from "@application/handlers/CreditHandler";
 import { DebitHandler } from "@application/handlers/DebitHandler";
+import { TransferHandler } from "@application/handlers/TransferHandler";
 import { AccountApplicationService } from "@application/services/AccountAplicationService";
 import { Publisher } from "@infra/queues/Publisher";
 import { AccountRepositoryMemory } from "@infra/repositories/AccountRepositoryMemory";
@@ -14,6 +14,7 @@ describe("Account Case", () => {
 
     publisher.register(new CreditHandler(accountRepositoryMemory));
     publisher.register(new DebitHandler(accountRepositoryMemory));
+    publisher.register(new TransferHandler(accountRepositoryMemory));
 
     service = new AccountApplicationService(publisher, accountRepositoryMemory);
   });
@@ -47,14 +48,13 @@ describe("Account Case", () => {
     service.create("111.111.111-11");
     service.create("222.222.222-22");
 
+    service.credit("111.111.111-11", 1000);
+    service.credit("222.222.222-22", 1000);
+
+    service.transfer("111.111.111-11", "222.222.222-22", 400);
+
     const accountFrom = service.get("111.111.111-11");
     const accountTo = service.get("222.222.222-22");
-
-    accountFrom.credit(1000);
-    accountTo.credit(1000);
-
-    const transfer = new TransferCommand(accountFrom, accountTo, 400);
-    transfer.execute();
 
     expect(accountFrom.getBalance()).toStrictEqual(600);
     expect(accountTo.getBalance()).toStrictEqual(1400);
@@ -64,12 +64,8 @@ describe("Account Case", () => {
     service.create("111.111.111-11");
     service.create("222.222.222-22");
 
-    const accountFrom = service.get("111.111.111-11");
-    const accountTo = service.get("222.222.222-22");
-
     try {
-      const transfer = new TransferCommand(accountFrom, accountTo, 400);
-      transfer.execute();
+      service.transfer("111.111.111-11", "222.222.222-22", 1000);
     } catch (err: any) {
       expect(err.message).toBe("money insuficienty to transfer");
     }

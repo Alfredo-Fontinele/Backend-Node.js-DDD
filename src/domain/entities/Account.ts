@@ -1,7 +1,8 @@
 import { AccountBuilder } from "@domain/builders/AccountBuilder";
 import { Transaction } from "@domain/entities/Transaction";
+import { Entity } from "./_Entity";
 
-export class Account {
+export class Account extends Entity {
   private bank?: string;
   private branch?: string;
   private account?: string;
@@ -9,6 +10,7 @@ export class Account {
   private transactions: Transaction[];
 
   constructor(accountBuilder: AccountBuilder) {
+    super();
     this.bank = accountBuilder.bank;
     this.branch = accountBuilder.branch;
     this.account = accountBuilder.account;
