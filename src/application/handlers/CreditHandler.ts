@@ -5,7 +5,7 @@ import { Observer } from "@infra/queues/Observer";
 export class CreditHandler implements Observer {
   operation = "credit";
 
-  constructor(readonly accountRepository: AccountRepository) {}
+  constructor(private accountRepository: AccountRepository) {}
 
   notify(command: CreditCommand): void {
     const account = this.accountRepository.get(command.accountDocument);

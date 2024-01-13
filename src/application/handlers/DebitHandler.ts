@@ -5,7 +5,7 @@ import { Observer } from "@infra/queues/Observer";
 export class DebitHandler implements Observer {
   operation = "debit";
 
-  constructor(readonly accountRepository: AccountRepository) {}
+  constructor(private accountRepository: AccountRepository) {}
 
   notify(command: DebitCommand): void {
     const account = this.accountRepository.get(command.accountDocument);

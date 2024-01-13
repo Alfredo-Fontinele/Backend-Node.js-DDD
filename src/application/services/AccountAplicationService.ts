@@ -6,8 +6,8 @@ import { Publisher } from "@infra/queues/Publisher";
 
 export class AccountApplicationService {
   constructor(
-    readonly publisher: Publisher,
-    readonly accountRepository: AccountRepository
+    private publisher: Publisher,
+    private readonly accountRepository: AccountRepository
   ) {}
 
   create(documet: string) {
@@ -17,13 +17,11 @@ export class AccountApplicationService {
 
   credit(accountDocument: string, amount: number) {
     const creditCommand = new CreditCommand(accountDocument, amount);
-
     this.publisher.publish(creditCommand);
   }
 
   debit(accountDocument: string, amount: number) {
     const debitCommand = new DebitCommand(accountDocument, amount);
-
     this.publisher.publish(debitCommand);
   }
 

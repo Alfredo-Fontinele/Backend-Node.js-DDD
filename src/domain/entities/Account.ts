@@ -1,5 +1,5 @@
+import { AccountBuilder } from "@domain/builders/AccountBuilder";
 import { Transaction } from "@domain/entities/Transaction";
-import { AccountBuilder } from "../builders/AccountBuilder";
 
 export class Account {
   private bank?: string;
@@ -25,12 +25,15 @@ export class Account {
   }
 
   getBalance() {
-    return this.transactions.reduce(
-      (acc, transaction) =>
-        transaction.type === "credit"
-          ? (acc += transaction.amount)
-          : (acc -= transaction.amount),
-      0
-    );
+    return this.transactions.reduce((acc, transaction) => {
+      switch (transaction.type) {
+        case "credit":
+          const addBalance = (acc += transaction.amount);
+          return addBalance;
+        case "debit":
+          const removeBalance = (acc -= transaction.amount);
+          return removeBalance;
+      }
+    }, 0);
   }
 }

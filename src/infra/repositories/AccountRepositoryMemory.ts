@@ -1,5 +1,5 @@
 import { Account } from "@domain/entities/Account";
-import { AccountRepository } from "../../domain/repositories/AccountRepository";
+import { AccountRepository } from "@domain/repositories/AccountRepository";
 
 export class AccountRepositoryMemory implements AccountRepository {
   accounts: Account[];
@@ -12,7 +12,9 @@ export class AccountRepositoryMemory implements AccountRepository {
     const account = this.accounts.find(
       (account) => account.document === accountDocument
     );
-    if (!account) throw new Error("Account Not Found");
+    if (!account) {
+      throw new Error("Account Not Found");
+    }
     return account;
   }
 
