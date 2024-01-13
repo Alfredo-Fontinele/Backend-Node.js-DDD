@@ -60,7 +60,7 @@ describe("Account Case", () => {
     expect(accountTo.getBalance()).toStrictEqual(1400);
   });
 
-  it("Deve criar duas contas e fazer uma transferência sem saldo", () => {
+  it("Deve criar duas contas e não fazer uma transferência sem saldo", () => {
     service.create("111.111.111-11");
     service.create("222.222.222-22");
 
