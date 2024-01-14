@@ -7,7 +7,7 @@ import { AccountRepositoryMemory } from "@infra/repositories/AccountRepositoryMe
 
 let service: AccountApplicationService;
 
-describe("Account Case", () => {
+describe("Account Entity", () => {
   beforeEach(() => {
     const publisher = new Publisher();
     const accountRepositoryMemory = new AccountRepositoryMemory();
@@ -19,7 +19,7 @@ describe("Account Case", () => {
     service = new AccountApplicationService(publisher, accountRepositoryMemory);
   });
 
-  it("Deve criar um conta ", () => {
+  it("Deve criar um conta", () => {
     service.create("111.111.111-11");
 
     const account = service.get("111.111.111-11");
