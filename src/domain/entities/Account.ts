@@ -1,5 +1,5 @@
-import { AccountBuilder } from "@domain/builders/AccountBuilder";
-import { Transaction } from "@domain/entities/Transaction";
+import { AccountBuilder } from "../builders/AccountBuilder";
+import { Transaction } from "./Transaction";
 import { Entity } from "./_Entity";
 
 export class Account extends Entity {

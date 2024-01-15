@@ -1,4 +1,4 @@
-import { Account } from "@domain/entities/Account";
+import { Account } from "../entities/Account";
 
 export interface AccountRepository {
   save(account: Account): void;

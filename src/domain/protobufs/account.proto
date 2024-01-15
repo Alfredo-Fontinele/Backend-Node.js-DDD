@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package account;
+
+service AccountService {
+    rpc getAccountInfo(AccountInfoRequest) returns (AccountInfoResponse);
+    rpc credit(AccountCreditRequest) returns (AccountCreditResponse);
+    rpc debit(AccountDebitRequest) returns (AccountDebitResponse);
+    rpc transfer(AccountTransferRequest) returns (AccountTransferResponse);
+}
+
+message AccountTransferRequest {
+  string accountFromDocument = 1;
+  string accountToDocument = 2;
+  int32 amount = 3;
+}
+
+message AccountTransferResponse {
+  bool sucess = 1;
+}
+
+message Transaction {
+  string type = 1;
+  double amount = 2;
+}
+
+message Account {
+  string bank = 1;
+  string branch = 2;
+  string account = 3;
+  string document = 4;
+  repeated Transaction transactions = 5;
+}
+
+message AccountInfoRequest {
+  string document = 1;
+}
+
+message AccountInfoResponse {
+  Account account = 1;
+}
+
+message AccountCreditRequest {
+  string document = 1;
+  double amount = 2;
+}
+
+message AccountCreditResponse {
+  bool success = 1;
+}
+
+message AccountDebitRequest {
+  string document = 1;
+  double amount = 2;
+}
+
+message AccountDebitResponse {
+  bool success = 1;
+}

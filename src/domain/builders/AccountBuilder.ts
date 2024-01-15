@@ -1,4 +1,4 @@
-import { Account } from "@domain/entities/Account";
+import { Account } from "../entities/Account";
 
 export class AccountBuilder {
   bank?: string;

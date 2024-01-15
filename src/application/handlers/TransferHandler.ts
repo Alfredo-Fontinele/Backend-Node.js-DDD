@@ -1,7 +1,7 @@
-import { TransferCommand } from "@application/commands/TransferCommand";
-import { AccountRepository } from "@domain/repositories/AccountRepository";
-import { TransferService } from "@domain/services/TransferService";
-import { Observer } from "@infra/queues/Observer";
+import { AccountRepository } from "../../domain/repositories/AccountRepository";
+import { TransferService } from "../../domain/services/TransferService";
+import { Observer } from "../../infra/queues/Observer";
+import { TransferCommand } from "../commands/TransferCommand";
 
 export class TransferHandler implements Observer {
   operation = "transfer";

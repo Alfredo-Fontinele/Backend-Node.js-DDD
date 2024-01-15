@@ -1,4 +1,4 @@
-import { CustomerBuilder } from "@domain/builders/CustomerBuilder";
+import { CustomerBuilder } from "../builders/CustomerBuilder";
 import { Account } from "./Account";
 import { Entity } from "./_Entity";
 
@@ -7,7 +7,7 @@ export class Customer extends Entity {
   private email: string;
   private address?: string;
   private phoneNumber?: string;
-  private accounts: Account[];
+  private accounts: Account[] = [];
 
   constructor(customerBuilder: CustomerBuilder) {
     super();

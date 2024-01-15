@@ -1,9 +1,9 @@
-import { CreditCommand } from "@application/commands/CreditCommand";
-import { DebitCommand } from "@application/commands/DebitCommand";
-import { TransferCommand } from "@application/commands/TransferCommand";
-import { AccountBuilder } from "@domain/builders/AccountBuilder";
-import { AccountRepository } from "@domain/repositories/AccountRepository";
-import { Publisher } from "@infra/queues/Publisher";
+import { AccountBuilder } from "../../domain/builders/AccountBuilder";
+import { AccountRepository } from "../../domain/repositories/AccountRepository";
+import { Publisher } from "../../infra/queues/Publisher";
+import { CreditCommand } from "../commands/CreditCommand";
+import { DebitCommand } from "../commands/DebitCommand";
+import { TransferCommand } from "../commands/TransferCommand";
 
 export class AccountApplicationService {
   constructor(
@@ -23,6 +23,7 @@ export class AccountApplicationService {
 
   debit(accountDocument: string, amount: number) {
     const debitCommand = new DebitCommand(accountDocument, amount);
+
     this.publisher.publish(debitCommand);
   }
 

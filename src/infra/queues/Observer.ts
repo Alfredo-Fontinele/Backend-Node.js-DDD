@@ -1,4 +1,4 @@
-import { Command } from "@application/commands/Command";
+import { Command } from "../../application/commands/Command";
 
 export interface Observer {
   operation: string;
